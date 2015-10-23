@@ -1,34 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aaeb0176-d966-4db7-b429-2c94bc2320a7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Anhui.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Anhui.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Beijing.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Beijing.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Chongqing.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Chongqing.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Gansu.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Gansu.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Guangdong.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Guangdong.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Guangxi.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Guangxi.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Hainan.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Hainan.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/HeNan.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/HeNan.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Heilongjiang.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Heilongjiang.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Hubei.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Hubei.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Jiangsu.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Jiangsu.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Jiangxi.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Jiangxi.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Jilin.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Jilin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Liaoning.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Liaoning.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Neimenggu.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Neimenggu.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Ningxia.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Ningxia.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Qinghai.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Qinghai.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Shandong.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Shandong.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Sichuang.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Sichuang.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Tianjin.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Tianjin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Xinjiang.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Xinjiang.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/Xizang.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/Xizang.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/YCParser.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/YCParser.py" />
+    <list default="true" id="aaeb0176-d966-4db7-b429-2c94bc2320a7" name="Default" comment="111">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/上海.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/上海.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/云南.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/云南.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/山西.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/山西.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Risk/信用公示系统/陕西.py" afterPath="$PROJECT_DIR$/Risk/信用公示系统/陕西.py" />
     </list>
     <ignored path="myRepository.iws" />
@@ -49,50 +23,14 @@
     <favorites_list name="myRepository" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="YCParser.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Risk/信用公示系统/YCParser.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Anhui.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Risk/信用公示系统/Anhui.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="64" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="山西.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Risk/信用公示系统/山西.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="70" column="34" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="陕西.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Risk/信用公示系统/陕西.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.10354223">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="ch" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -537,18 +475,26 @@
       <option name="number" value="Default" />
       <updated>1445562614131</updated>
     </task>
+    <task id="LOCAL-00001" summary="111">
+      <created>1445603478568</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1445603478568</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16977078" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16977078" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879657" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32939634" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3803725" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -566,6 +512,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="111" />
+    <option name="LAST_COMMIT_MESSAGE" value="111" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -699,14 +649,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Risk/信用公示系统/YCParser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Risk/信用公示系统/Jilin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="4.0658436">
@@ -803,26 +745,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Risk/信用公示系统/Anhui.py">
+    <entry file="file://$PROJECT_DIR$/Risk/信用公示系统/陕西.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="64" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.45566165">
+          <caret line="65" column="26" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Risk/信用公示系统/山西.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="70" column="34" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.45702592">
+          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="63" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Risk/信用公示系统/陕西.py">
+    <entry file="file://$PROJECT_DIR$/Risk/信用公示系统/Anhui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10354223">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.3792633">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="64" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Risk/信用公示系统/YCParser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25920874">
+          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
           <folding />
         </state>
       </provider>
