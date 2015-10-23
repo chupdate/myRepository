@@ -5,27 +5,36 @@ import re
 
 class YCParser():
 
-    def gethtml(self,req,retries=1,timeout=15):
+    def gethtml(self,req,retries=3,timeout=15):
         try:
             page=urllib.request.urlopen(req,timeout=timeout)
             html=BeautifulSoup(page.read(),"html.parser")
             return html
         except Exception:
-            if retries>0:
-                return self.gethtml(req, retries-1)
-            else:
-                return 'Get Failed'
+            if retries>0:return self.gethtml(req, retries-1)
+            else:raise Exception
 
     def GetYC(self,location,startdate,enddate):
         self.f=open('D:\\GSXT\\'+location+'.txt','w')
         self.pageerror=open('D:\\GSXT\\ErrorPages\\'+location+'.txt','w')
+        self.itemerror=open('D:\\GSXT\\ErrorItems\\'+location+'.txt','w')
+        self.pageerrornum=0
+        self.itemerrornum=0
         self.getentlist(startdate,enddate)
         self.f.close()
         self.pageerror.close()
+        print('pageerrornum=',self.pageerrornum)
+        print('itemerrornum=',self.itemerrornum)
 
     def printpageerror(self,pageNos):
         print('Page %d Failed' % pageNos)
+        self.pageerrornum+=1
         self.pageerror.write(str(pageNos)+'\n')
+
+    def printitemerror(self,pageNos,i):
+        print('item error')
+        self.itemerrornum+=1
+        self.itemerror.write(str(pageNos)+','+str(i)+'\n')
 
     def dealID(self,regID):
         reg=r'(\d+)'

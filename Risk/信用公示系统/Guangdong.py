@@ -26,33 +26,39 @@ class GetYCParser(YCParser):
     def getentlist(self,startdate,enddate):
         pageNos=-1
         while True:
-            pageNos+=1
-            req=urllib.request.Request(
-                url='http://gsxt.gdgs.gov.cn/aiccips/main/abnInfoList.html?pageNo='+str(pageNos),
-                data=self.getpostdata(pageNos),
-                headers={'User-Agent':'Magic Browser'}
-            )
-            result=self.gethtml(req)
-            if result=='Get Failed':
-                self.printpageerror(pageNos)
+            try:
+                pageNos+=1
+                if pageNos>19484:break
+                req=urllib.request.Request(
+                    url='http://gsxt.gdgs.gov.cn/aiccips/main/abnInfoList.html?pageNo='+str(pageNos),
+                    data=self.getpostdata(pageNos),
+                    headers={'User-Agent':'Magic Browser'}
+                )
+                result=self.gethtml(req)
+                relist=json.loads(str(result))['rows']
+            except Exception:
+                self.printpageerror(pageNos+1)
                 continue
-            print('Page %d Reading' % (pageNos+1))
-            relist=json.loads(str(result))['rows']
-            br=0
-            for re in relist:
-                cdate=re['abnTimeStr']
-                cdate=date(int(cdate[0:4]),int(cdate[5:7]),int(cdate[8:10]))
-                if cdate<startdate:
-                    br=1
-                    break
-                else:
-                    if cdate<=enddate:
-                        Name=re['entName'];regID=re['regNO'];entNo=re['entNo']
-                        entType=re['entType'];regOrg=re['decOrg']
-                        entdict=dict(Name=Name,regID=regID,entNo=entNo,entType=entType,regOrg=regOrg)
-                        self.PrintInfo(entdict)
+            else:
+                print('Page %d Reading' % (pageNos+1))
+                br=0
+                for re in relist:
+                    try:
+                        cdate=re['abnTimeStr']
+                        cdate=date(int(cdate[0:4]),int(cdate[5:7]),int(cdate[8:10]))
+                        if cdate<startdate:
+                            br=1
+                            break
+                        else:
+                            if cdate<=enddate:
+                                Name=re['entName'];regID=re['regNO'];entNo=re['entNo']
+                                entType=re['entType'];regOrg=re['decOrg']
+                                entdict=dict(Name=Name,regID=regID,entNo=entNo,entType=entType,regOrg=regOrg)
+                                self.PrintInfo(entdict)
+                    except Exception:
+                        self.printitemerror(pageNos,re)
+                        continue
             if br==1:break
-
 
     def PrintInfo(self,ent):
         #使用post方法提取经营异常信息
@@ -68,4 +74,4 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='广东'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(2015,10,8),enddate=date.today()-timedelta(days=1))
+    YCParser.GetYC(location,startdate=date(1900,10,8),enddate=date.today()-timedelta(days=1))

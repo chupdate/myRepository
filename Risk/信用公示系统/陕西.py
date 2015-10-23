@@ -21,43 +21,42 @@ class GetYCParser(YCParser):
     def getentlist(self,startdate,enddate):
         pageNos=0
         while True:
-            pageNos+=1
-            req=urllib.request.Request(
-                url='http://117.22.252.219:8002/xxcx.do?method=ycmlIndex&random='+str(time.time()*1000)+'&cxyzm=no&entnameold=&djjg=&maent.entname=&page.currentPageNo='+str(pageNos)+'&yzm=',
-                headers={'User-Agent':'Magic Browser'}
-            )
-            result=self.gethtml(req,timeout=60)
-            if result=='Get Failed':
+            try:
+                pageNos+=1
+                req=urllib.request.Request(
+                    url='http://117.22.252.219:8002/xxcx.do?method=ycmlIndex&random='+str(time.time()*1000)+'&cxyzm=no&entnameold=&djjg=&maent.entname=&page.currentPageNo='+str(pageNos)+'&yzm=',
+                    headers={'User-Agent':'Magic Browser'}
+                )
+                result=self.gethtml(req,timeout=60)
+                infolist=result.findAll('a',attrs={'onclick':re.compile(r'javascript:doOpen*')})
+                regIDlist=result.findAll('li',attrs={'class':'tb-a2'})
+                datelist=result.findAll('li',attrs={'class':'tb-a3'})
+                del regIDlist[0]
+                del datelist[0]
+                l=len(datelist)
+            except Exception:
                 self.printpageerror(pageNos)
                 continue
-            print('Page %d Reading' % pageNos)
-            infolist=result.findAll('a',attrs={'onclick':re.compile(r'javascript:doOpen*')})
-            regIDlist=result.findAll('li',attrs={'class':'tb-a2'})
-            datelist=result.findAll('li',attrs={'class':'tb-a3'})
-            del regIDlist[0]
-            del datelist[0]
-            l=len(datelist)
-            if l==0:break
-            br=0
-            for i in range(l):
-                cdate=str(datelist[i].contents[0])
-                reg=r'年(.*?)月'
-                pattern=re.compile(reg)
-                month=int(pattern.findall(cdate)[0])
-                reg=r'月(.*?)日'
-                pattern=re.compile(reg)
-                day=int(pattern.findall(cdate)[0])
-                cdate=date(int(cdate[0:4]),month,day)
-                if cdate<startdate:
-                    br=1
-                    break
-                else:
-                    if cdate<=enddate:
-                        Name=infolist[i].contents[0]
-                        regID=regIDlist[i].contents[0]
-                        pri=self.dealID(infolist[i].get('onclick'))
-                        entdict=dict(Name=Name,regID=regID,Date=cdate,pri=pri)
-                        self.PrintInfo(entdict)
+                br=0
+                for i in range(l):
+                    cdate=str(datelist[i].contents[0])
+                    reg=r'年(.*?)月'
+                    pattern=re.compile(reg)
+                    month=int(pattern.findall(cdate)[0])
+                    reg=r'月(.*?)日'
+                    pattern=re.compile(reg)
+                    day=int(pattern.findall(cdate)[0])
+                    cdate=date(int(cdate[0:4]),month,day)
+                    if cdate<startdate:
+                        br=1
+                        break
+                    else:
+                        if cdate<=enddate:
+                            Name=infolist[i].contents[0]
+                            regID=regIDlist[i].contents[0]
+                            pri=self.dealID(infolist[i].get('onclick'))
+                            entdict=dict(Name=Name,regID=regID,Date=cdate,pri=pri)
+                            self.PrintInfo(entdict)
             if br==1:break
 
     def PrintInfo(self,ent):

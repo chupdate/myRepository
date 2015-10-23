@@ -35,71 +35,71 @@ class GetYCParser(YCParser):
     def getentlist(self,startdate,enddate):
         pageNos=0
         while True:
-            pageNos+=1
-            req=urllib.request.Request(
-                url='http://tjcredit.gov.cn/platform/saic/exclist.ftl',
-                data=self.getpostdata(pageNos),
-                headers={'User-Agent':'Magic Browser'}
-            )
-            result=self.gethtml(req)
-            if result=='Get Failed':
+            try:
+                pageNos+=1
+                if pageNos>18640:break
+                req=urllib.request.Request(
+                    url='http://tjcredit.gov.cn/platform/saic/exclist.ftl',
+                    data=self.getpostdata(pageNos),
+                    headers={'User-Agent':'Magic Browser'}
+                )
+                result=self.gethtml(req)
+                infolist=result.findAll('li',attrs={'class':'tb-a1'})
+                datelist=result.findAll('li',attrs={'class':'tb-a3'})
+                l=len(datelist)
+                del infolist[0]
+                del datelist[0]
+            except Exception:
                 self.printpageerror(pageNos)
                 continue
-            print('Page %d Reading' % pageNos)
-            infolist=result.findAll('li',attrs={'class':'tb-a1'})
-            datelist=result.findAll('li',attrs={'class':'tb-a3'})
-            del infolist[0]
-            del datelist[0]
-            l=len(datelist)
-            if l==0:break
-            k=0
-            for i in range(l):
-                cdate=str(datelist[i].contents[0])
-                cdate=self.changedate(cdate)
-                if (cdate>=startdate)&(cdate<=enddate):
-                    Name=infolist[i].find('a').contents[0]
-                    href=infolist[i].find('a').get('href')
-                    reg=r'entId=(.*)'
-                    pattern=re.compile(reg)
-                    entId=pattern.findall(href)[0]
-                    entdict=dict(Name=Name,entId=entId)
-                    self.PrintInfo(entdict,self.f)
-                if cdate<startdate:
-                    k=1
-                    break
+            else:
+                print('Page %d Reading' % pageNos)
+                k=0
+                for i in range(l):
+                    try:
+                        cdate=str(datelist[i].contents[0])
+                        cdate=self.changedate(cdate)
+                        if (cdate>=startdate)&(cdate<=enddate):
+                            Name=infolist[i].find('a').contents[0]
+                            href=infolist[i].find('a').get('href')
+                            reg=r'entId=(.*)'
+                            pattern=re.compile(reg)
+                            entId=pattern.findall(href)[0]
+                            entdict=dict(Name=Name,entId=entId)
+                            self.PrintInfo(entdict,self.f)
+                        if cdate<startdate:
+                            k=1
+                            break
+                    except Exception:
+                        self.printitemerror(pageNos,i)
+                        continue
             if k==1:break
 
     def PrintInfo(self,ent,f):
         #取得注册号
         infourl='http://tjcredit.gov.cn/platform/saic/viewBaseExc.ftl?entId='+ent.get('entId')
         inforesult=self.gethtml(infourl)
-        if inforesult=='Get Failed':
-            print('Item Failed')
-        else:
-            id=inforesult.findAll('span')[1].contents[0][5:]
-        #取得经营异常信息
-            infourl='http://tjcredit.gov.cn/platform/saic/baseInfo.json?entId='+ent.get('entId')+'&departmentId=scjgw&infoClassId=qyjyycmlxx'
-            inforesult=self.gethtml(infourl)
-            if inforesult=='Get Failed':
-                print('Item Failed')
-            else:
-                infolist=inforesult.findAll('td',attrs={'class':''})
-                l=int(len(infolist)/6)
-                for j in range(l):
-                    f.write(ent.get('Name')+'|')
-                    f.write(id+'|')
-                    for k in range(6):
-                        i=j*6+k
-                        infostr=infolist[i].contents
-                        if infostr:
-                            infostr=infostr[0]
-                            if i==2:f.write(str(self.changedate(str(infostr))))
-                            else:f.write(infostr.replace('\n','').strip())
-                        f.write('|')
-                    f.write('\n')
+        id=inforesult.findAll('span')[1].contents[0][5:]
+    #取得经营异常信息
+        infourl='http://tjcredit.gov.cn/platform/saic/baseInfo.json?entId='+ent.get('entId')+'&departmentId=scjgw&infoClassId=qyjyycmlxx'
+        inforesult=self.gethtml(infourl)
+        infolist=inforesult.findAll('td',attrs={'class':''})
+        l=int(len(infolist)/6)
+        for j in range(l):
+            f.write(ent.get('Name')+'|')
+            f.write(id+'|')
+            for k in range(6):
+                i=j*6+k
+                infostr=infolist[i].contents
+                if infostr:
+                    infostr=infostr[0]
+                    if i==2:f.write(str(self.changedate(str(infostr))))
+                    else:f.write(infostr.replace('\n','').strip())
+                f.write('|')
+            f.write('\n')
 
 
 if __name__=='__main__':
     location='天津'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(2015,10,8),enddate=date.today()-timedelta(days=1))
+    YCParser.GetYC(location,startdate=date(1900,10,8),enddate=date.today()-timedelta(days=1))

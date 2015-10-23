@@ -39,31 +39,34 @@ class GetYCParser(YCParser):
         result=self.gethtml(req)
         self.token=result.find('meta',attrs={'name':'_csrf'}).get('content')
         while True:
-            pageNos+=1
-            req=urllib.request.Request(
-                url='http://218.57.139.24/pub/jyyc',
-                data=self.getpagepostdata(pageNos),
-                headers={'X-CSRF-TOKEN':self.token,
-                         'Cookie':self.cookie,
-                        'Accept': 'application/json, text/javascript, */*; q=0.01'}
-            )
-            result=self.gethtml(req)
-            if result=='Get Failed':
-                self.printpageerror(pageNos)
-                continue
-            print('Page %d Reading' % pageNos)
-            jsonlist=json.loads(str(result))
-            if not jsonlist:break
-            br=0
-            for jsonre in jsonlist:
-                cdate=self.setdate(jsonre['abntime'])
-                if cdate<startdate:
-                    br=1
-                    break
-                else:
-                    if cdate<=enddate:
-                        entdict=dict(Name=jsonre['entname'],pri=jsonre['pripid'],reg=jsonre['regno'],type=jsonre['enttype'])
-                        self.PrintInfo(entdict,self.f)
+            try:
+                pageNos+=1
+                if pageNos>20934:break
+                req=urllib.request.Request(
+                    url='http://218.57.139.24/pub/jyyc',
+                    data=self.getpagepostdata(pageNos),
+                    headers={'X-CSRF-TOKEN':self.token,
+                             'Cookie':self.cookie,
+                            'Accept': 'application/json, text/javascript, */*; q=0.01'}
+                )
+                result=self.gethtml(req)
+                jsonlist=json.loads(str(result))
+            except Exception:
+                print('Page %d Reading' % pageNos)
+                br=0
+                for jsonre in jsonlist:
+                    try:
+                        cdate=self.setdate(jsonre['abntime'])
+                        if cdate<startdate:
+                            br=1
+                            break
+                        else:
+                            if cdate<=enddate:
+                                entdict=dict(Name=jsonre['entname'],pri=jsonre['pripid'],reg=jsonre['regno'],type=jsonre['enttype'])
+                                self.PrintInfo(entdict,self.f)
+                    except Exception:
+                        self.printitemerror(pageNos,jsonre)
+                        continue
             if br==1:break
 
     def PrintInfo(self,ent,f):
@@ -75,23 +78,20 @@ class GetYCParser(YCParser):
                      'Cookie':self.cookie}
         )
         inforesult=str(self.gethtml(req))
-        if inforesult=='Get Failed':
-            print('regNo Failed:',ent.get('reg'))
-        else:
-            infolist=json.loads(inforesult)
-            l=len(infolist)
-            for i in range(l):
-                f.write(ent.get('Name')+'|')
-                f.write(ent.get('reg')+'|')
-                f.write(str(i+1)+'|')
-                f.write(infolist[i]['specause']+'|')
-                f.write(str(self.setdate(infolist[i]['abntime']))+'|')
-                f.write(infolist[i]['remexcpres']+'|')
-                f.write(str(self.setdate(infolist[i]['remdate']))+'|')
-                f.write(infolist[i]['decorg']+'|')
-                f.write('\n')
+        infolist=json.loads(inforesult)
+        l=len(infolist)
+        for i in range(l):
+            f.write(ent.get('Name')+'|')
+            f.write(ent.get('reg')+'|')
+            f.write(str(i+1)+'|')
+            f.write(infolist[i]['specause']+'|')
+            f.write(str(self.setdate(infolist[i]['abntime']))+'|')
+            f.write(infolist[i]['remexcpres']+'|')
+            f.write(str(self.setdate(infolist[i]['remdate']))+'|')
+            f.write(infolist[i]['decorg']+'|')
+            f.write('\n')
 
 if __name__=='__main__':
     location='山东'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(2015,10,9),enddate=date.today())
+    YCParser.GetYC(location,startdate=date(1900,10,9),enddate=date.today())

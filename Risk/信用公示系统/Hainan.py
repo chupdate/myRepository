@@ -29,33 +29,39 @@ class GetYCParser(YCParser):
     def getentlist(self,startdate,enddate):
         pageNos=-1
         while True:
-            pageNos+=1
-            time.sleep(1)
-            req=urllib.request.Request(
-                url='http://aic.hainan.gov.cn:1888/aiccips/main/abnInfoList.html',
-                data=self.getpostdata(pageNos),
-                headers={'User-Agent':'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0',
-                         'Accept':'application/json, text/javascript, */*; q=0.01',
-                         'Content-Length':'19'}
-            )
-            result=str(self.gethtml(req))
-            if result=='Get Failed':
-                self.printpageerror(pageNos)
+            try:
+                pageNos+=1
+                time.sleep(1)
+                req=urllib.request.Request(
+                    url='http://aic.hainan.gov.cn:1888/aiccips/main/abnInfoList.html',
+                    data=self.getpostdata(pageNos),
+                    headers={'User-Agent':'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0',
+                             'Accept':'application/json, text/javascript, */*; q=0.01',
+                             'Content-Length':'19'}
+                )
+                result=str(self.gethtml(req))
+                resultlist=json.loads(result)['rows']
+            except Exception:
+                self.printpageerror(pageNos+1)
                 continue
-            print('Page %d Reading' % (pageNos+1))
-            resultlist=json.loads(result)['rows']
-            br=0
-            for result in resultlist:
-                cdate=result['abnTimeStr']
-                cdate=date(int(cdate[0:4]),int(cdate[5:7]),int(cdate[8:10]))
-                if cdate<startdate:
-                    br=1
-                    break
-                else:
-                    if cdate<=enddate:
-                        entdict=dict(Name=result['entName'],reg=result['regNO'],entNo=result['entNo'],entType=result['entType'],regOrg=result['decOrg'])
-                        self.PrintInfo(entdict,self.f)
-            if br==1:break
+            else:
+                print('Page %d Reading' % (pageNos+1))
+                br=0
+                for result in resultlist:
+                    try:
+                        cdate=result['abnTimeStr']
+                        cdate=date(int(cdate[0:4]),int(cdate[5:7]),int(cdate[8:10]))
+                        if cdate<startdate:
+                            br=1
+                            break
+                        else:
+                            if cdate<=enddate:
+                                entdict=dict(Name=result['entName'],reg=result['regNO'],entNo=result['entNo'],entType=result['entType'],regOrg=result['decOrg'])
+                                self.PrintInfo(entdict,self.f)
+                    except Exception:
+                        self.printitemerror(pageNos,result)
+                        continue
+                if br==1:break
 
     def PrintInfo(self,ent,f):
         time.sleep(2)
@@ -68,22 +74,19 @@ class GetYCParser(YCParser):
                      'Cookie': 'JSESSIONID=CgsBFgdgVhxf2nCRj0NlnEeauZChK5_qoYwA.aiccips_1; CNZZDATA1000300888=150854017-1438154072-http%253A%252F%252Fgsxt.saic.gov.cn%252F%7C1444699325'}
         )
         inforesult=self.gethtml(req)
-        if inforesult=='Get Failed':
-            print('Item Failed')
-        else:
-            infolist=inforesult.findAll('td')
-            l=int(len(infolist)/6)
-            for j in range(l):
-                f.write(ent.get('Name').replace('\n','').strip()+'|')
-                f.write(ent.get('reg').strip()+'|')
-                for k in range(6):
-                    i=j*6+k
-                    infostr=infolist[i].contents
-                    if infostr:
-                        infostr=infostr[0]
-                        f.write(infostr.replace('\n','').strip())
-                    f.write('|')
-                f.write('\n')
+        infolist=inforesult.findAll('td')
+        l=int(len(infolist)/6)
+        for j in range(l):
+            f.write(ent.get('Name').replace('\n','').strip()+'|')
+            f.write(ent.get('reg').strip()+'|')
+            for k in range(6):
+                i=j*6+k
+                infostr=infolist[i].contents
+                if infostr:
+                    infostr=infostr[0]
+                    f.write(infostr.replace('\n','').strip())
+                f.write('|')
+            f.write('\n')
 
 if __name__=='__main__':
     location='海南'
