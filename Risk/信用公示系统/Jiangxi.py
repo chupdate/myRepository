@@ -8,7 +8,7 @@ from YCParser import YCParser
 class GetYCParser(YCParser):
 
     def getentlist(self,startdate,enddate):
-        pageNos=0
+        pageNos=12438
         while True:
             try:
                 pageNos+=1

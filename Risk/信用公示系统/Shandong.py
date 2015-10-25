@@ -31,7 +31,7 @@ class GetYCParser(YCParser):
     def getentlist(self,startdate,enddate):
         pageNos=0
         #根据Cookie获取token
-        self.cookie='JSESSIONID=uF5m2XQzticMGyTLp3QrBJeU.undefined'
+        self.cookie=' JSESSIONID=+dp8swNy9jPUjC2yc6D2hYoO.undefined'
         req=urllib.request.Request(
             url='http://218.57.139.24/pub/abnormalrecordindex',
             headers={'Cookie':self.cookie}
@@ -41,7 +41,7 @@ class GetYCParser(YCParser):
         while True:
             try:
                 pageNos+=1
-                if pageNos>20934:break
+                if pageNos>19023:break
                 req=urllib.request.Request(
                     url='http://218.57.139.24/pub/jyyc',
                     data=self.getpagepostdata(pageNos),
@@ -52,6 +52,9 @@ class GetYCParser(YCParser):
                 result=self.gethtml(req)
                 jsonlist=json.loads(str(result))
             except Exception:
+                self.printpageerror(pageNos)
+                continue
+            else:
                 print('Page %d Reading' % pageNos)
                 br=0
                 for jsonre in jsonlist:

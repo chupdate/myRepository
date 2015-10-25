@@ -19,7 +19,7 @@ class GetYCParser(YCParser):
         while True:
             try:
                 pageNos+=1
-                if pageNos>51890:break
+                if pageNos>51891:break
                 req=urllib.request.Request(
                     url='http://xyjg.egs.gov.cn/ECPS_HB/exceptionInfoSelect.jspx',
                     data=self.getpostdata(pageNos),

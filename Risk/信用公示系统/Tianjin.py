@@ -102,4 +102,4 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='天津'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,10,8),enddate=date.today()-timedelta(days=1))
+    YCParser.GetYC(location,startdate=date(1900,10,8),enddate=date.today()-timedelta(days=0))

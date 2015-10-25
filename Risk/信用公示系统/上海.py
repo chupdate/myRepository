@@ -12,7 +12,7 @@ class GetYCParser(YCParser):
             'captcha':'',
             'condition.pageNo':'%d'% pageNos,
             'condition.insType':'',
-            'session.token':'30199d57-3645-42b3-95b4-6c053b02a04a',
+            'session.token':'61d07d45-1236-4803-ad46-e7f10e8a3b3a',
             'condition.keyword':''
         }).encode('utf-8')
         return postdata

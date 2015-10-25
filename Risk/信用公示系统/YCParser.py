@@ -14,10 +14,10 @@ class YCParser():
             if retries>0:return self.gethtml(req, retries-1)
             else:raise Exception
 
-    def GetYC(self,location,startdate,enddate):
-        self.f=open('D:\\GSXT\\'+location+'.txt','w')
-        self.pageerror=open('D:\\GSXT\\ErrorPages\\'+location+'.txt','w')
-        self.itemerror=open('D:\\GSXT\\ErrorItems\\'+location+'.txt','w')
+    def GetYC(self,location,startdate,enddate,fmode='w',pagemode='w',itemmode='w'):
+        self.f=open('D:\\GSXT\\'+location+'.txt',fmode)
+        self.pageerror=open('D:\\GSXT\\ErrorPages\\'+location+'.txt',pagemode)
+        self.itemerror=open('D:\\GSXT\\ErrorItems\\'+location+'.txt',itemmode)
         self.pageerrornum=0
         self.itemerrornum=0
         self.getentlist(startdate,enddate)

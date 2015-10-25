@@ -37,6 +37,7 @@ class GetYCParser(YCParser):
 
     def getentlist(self,startdate,enddate):
         pageNos=-1
+        self.cookie='JSESSIONID=YcVSWq2GKyPg8Gp2nGN0KsDjmvNz1W6qbpG6sHH8fpkQJQggJl4J!345178685; JSESSIONID_NS_Sig=p1OAksXyrxb4ZvK_; CNZZDATA1000300873=1958545152-1445653384-http%253A%252F%252Fwww.nmgs.gov.cn%253A7001%252F%7C1445653384; BIGipServerpool_10.10.10.2_7001=235538954.22811.0000'
         while True:
             try:
                 pageNos+=1
@@ -44,9 +45,9 @@ class GetYCParser(YCParser):
                 req=urllib.request.Request(
                    url='http://www.nmgs.gov.cn:7001/aiccips/main/abnInfoList.html',
                    data=self.getpagepostdata(pageNos),
-                   headers={'User-Agent':'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0',
+                   headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',
                             'Content-Length':'19',
-                            'Cookie': 'CNZZDATA1000300873=998710141-1438070875-%7C1444465875; JSESSIONID=H9pBWYTKQ2K23pVZfhhCStMWZDVQM61w1z9l2WJTncTCsHYpgM2W!845010739; BIGipServerpool_10.10.10.2_7001=34212362.22811.0000'
+                            'Cookie':self.cookie
                             })
                 result=str(self.gethtml(req))
                 result=json.loads(result)
@@ -65,20 +66,19 @@ class GetYCParser(YCParser):
                             break
                         else:
                             if cdate<=enddate:
-                                entdict=dict(Name=jsonre['entName'],entNo=jsonre['entNo'],reg=jsonre['regNO'],type=jsonre['entType'],dec=jsonre['decOrg'])
+                                entdict=dict(Name=jsonre['entName'],entNo=jsonre['entNo'],regID=jsonre['regNO'],type=jsonre['entType'],dec=jsonre['decOrg'])
                                 self.PrintInfo(entdict)
                     except Exception:
-                        self.printitemerror(pageNos,i)
+                        self.printitemerror(pageNos,jsonre)
                         continue
             if br==1:break
 
     def PrintInfo(self,ent):
-        print(ent)
         req=urllib.request.Request(
             url='http://www.nmgs.gov.cn:7001/aiccips/GSpublicity/GSpublicityList.html?service=cipUnuDirInfo',
             data=self.getinfopostdata(ent['entNo'],ent['type'],ent['dec']),
-            headers={'User-Agent':'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0',
-                    'Cookie':'CNZZDATA1000300873=998710141-1438070875-|1444465875; JSESSIONID=c7JnWYjVvpnJJyJvMmvJdSV362hnsXLcD1nL9wbj851NQd4XWz0L!563693180; BIGipServerpool_10.10.10.2_7001=34212362.22811.0000'})
+            headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',
+                    'Cookie':self.cookie})
         inforesult=self.gethtml(req)
         infolist=inforesult.findAll('td')
         self.gendown(ent,infolist)
