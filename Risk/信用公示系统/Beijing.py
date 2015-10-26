@@ -45,7 +45,8 @@ class GetYCParser(YCParser):
                             break
                         else:
                             if cdate<=enddate:
-                                Name=infolist[i-2].find('a').contents[0]
+                                Name=infolist[i-2].find('a').contents[0].replace('\n','').strip()
+                                if len(Name)<=3:continue
                                 regID=infolist[i-1].contents[0]
                                 EntInfo=infolist[i-2].find('a').get('onclick')
                                 reg=r'\'([A-Za-z0-9]{32})\''

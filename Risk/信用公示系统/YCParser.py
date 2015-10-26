@@ -45,7 +45,7 @@ class YCParser():
     def gendown(self,ent,infolist):
         l=int(len(infolist)/6)
         for j in range(l):
-            self.f.write(ent.get('Name').replace('\n','').strip()+'|')
+            self.f.write(ent.get('Name')+'|')
             self.f.write(ent.get('regID').strip()+'|')
             for k in range(6):
                 i=j*6+k

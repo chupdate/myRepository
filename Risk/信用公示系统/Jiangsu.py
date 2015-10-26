@@ -75,7 +75,9 @@ class GetYCParser(YCParser):
                             break
                         else:
                             if cdate<=enddate:
-                                entdict=dict(Name=Namelist[i],regID=regIDlist[i],Date=cdate,ID=IDlist[i],ORG=ORGlist[i],SeqID=SeqIDlist[i])
+                                Name=Namelist[i].replace('\n','').strip()
+                                if len(Name)<=3:continue
+                                entdict=dict(Name=Name,regID=regIDlist[i],Date=cdate,ID=IDlist[i],ORG=ORGlist[i],SeqID=SeqIDlist[i])
                                 self.PrintInfo(entdict,self.f)
                     except Exception:
                         self.printitemerror(pageNos,i)
@@ -126,5 +128,5 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='江苏'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,10,8),enddate=date.today()-timedelta(days=1))
+    YCParser.GetYC(location,startdate=date(1900,10,8),enddate=date.today()-timedelta(days=0))
 

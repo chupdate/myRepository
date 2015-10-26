@@ -2,6 +2,7 @@ __author__ = 'Chen'
 #coding=utf-8
 #有时存在重定向问题
 #页数或无限增加
+#如果遇到页面出错要刷新网页
 import urllib.parse,urllib.request
 
 import re
@@ -22,6 +23,7 @@ class GetYCParser(YCParser):
         while True:
             try:
                 pageNos+=1
+                if pageNos>26681:break
                 req=urllib.request.Request(
                     url='http://222.143.24.157/exceptionInfoSelect.jspx',
                     data=self.getpostdata(pageNos),
@@ -55,7 +57,8 @@ class GetYCParser(YCParser):
                             break
                         else:
                             if cdate<=enddate:
-                                Name=infolist[i].contents[0]
+                                Name=infolist[i].contents[0].replace('\n','').strip()
+                                if len(Name)<=3:continue
                                 regID=self.dealID(regIDlist[i].contents[0])
                                 href=infolist[i].get('href')
                                 entdict=dict(Name=Name,regID=regID,Date=cdate,href=href)
@@ -69,7 +72,7 @@ class GetYCParser(YCParser):
         req=urllib.request.Request(
             url='http://222.143.24.157'+ent.get('href'),
             headers={'User-Agent':'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0',
-                     'Cookie':'JSESSIONID=0000U2BgXmkL4MR7wcsNgVON-zu:-1',
+                     'Cookie':'JSESSIONID=0000MaR3ePbAA3JVLWHYx3rbqY6:-1',
                      'Accept-Language':'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
                      'Host': '222.143.24.157' ,
                      'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -83,6 +86,6 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='河南'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,10,8),enddate=date.today()-timedelta(days=1))
+    YCParser.GetYC(location,startdate=date(1900,10,8),enddate=date.today()-timedelta(days=0))
 
 

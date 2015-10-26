@@ -31,6 +31,7 @@ class GetYCParser(YCParser):
         while True:
             try:
                 pageNos+=1
+                if pageNos>6519:break
                 time.sleep(1)
                 req=urllib.request.Request(
                     url='http://aic.hainan.gov.cn:1888/aiccips/main/abnInfoList.html',
@@ -56,7 +57,9 @@ class GetYCParser(YCParser):
                             break
                         else:
                             if cdate<=enddate:
-                                entdict=dict(Name=result['entName'],reg=result['regNO'],entNo=result['entNo'],entType=result['entType'],regOrg=result['decOrg'])
+                                Name=result['entName'].replace('\n','').strip()
+                                if len(Name)<=3:continue
+                                entdict=dict(Name=Name,reg=result['regNO'],entNo=result['entNo'],entType=result['entType'],regOrg=result['decOrg'])
                                 self.PrintInfo(entdict,self.f)
                     except Exception:
                         self.printitemerror(pageNos,result)
@@ -71,13 +74,13 @@ class GetYCParser(YCParser):
             headers={'User-Agent':'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0',
                      'Content-Length':'71',
                      'Content-Type': 'application/x-www-form-urlencoded',
-                     'Cookie': 'JSESSIONID=CgsBFgdgVhxf2nCRj0NlnEeauZChK5_qoYwA.aiccips_1; CNZZDATA1000300888=150854017-1438154072-http%253A%252F%252Fgsxt.saic.gov.cn%252F%7C1444699325'}
+                     'Cookie': 'JSESSIONID=CgsBFgdgVi3QhkH2wsJ-Qkzkj5mrI6FfjegA.aiccips_1; CNZZDATA1000300888=1269382305-1445819375-http%253A%252F%252Fgsxt.saic.gov.cn%252F%7C1445842173'}
         )
         inforesult=self.gethtml(req)
         infolist=inforesult.findAll('td')
         l=int(len(infolist)/6)
         for j in range(l):
-            f.write(ent.get('Name').replace('\n','').strip()+'|')
+            f.write(ent.get('Name')+'|')
             f.write(ent.get('reg').strip()+'|')
             for k in range(6):
                 i=j*6+k

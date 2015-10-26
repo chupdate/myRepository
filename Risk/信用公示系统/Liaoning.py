@@ -47,7 +47,8 @@ class GetYCParser(YCParser):
                             break
                         else:
                             if cdate<=enddate:
-                                Name=infolist[i].contents[0]
+                                Name=infolist[i].contents[0].replace('\n','').strip()
+                                if len(Name)<=3:continue
                                 regID=regIDlist[i].contents[0]
                                 Name=Name.replace('\n','').strip()
                                 regID=regID.replace('\n','').strip()
@@ -76,7 +77,7 @@ class GetYCParser(YCParser):
         infolist=pattern.findall(info)
         l=len(infolist)
         for i in range(l):
-            f.write(ent.get('Name').strip()+'|')
+            f.write(ent.get('Name')+'|')
             f.write(ent.get('regID').strip()+'|')
             f.write(str(i+1)+'|')
             infdict=eval(infolist[i])

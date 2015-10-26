@@ -66,7 +66,9 @@ class GetYCParser(YCParser):
                     break
                 else:
                     if cdate<=enddate:
-                        entdict=dict(Name=res['qymc'],nbxh=res['nbxh'],regID=res['zch'],date=cdate)
+                        Name=res['qymc'].replace('\n','').strip()
+                        if len(Name)<=3:continue
+                        entdict=dict(Name=Name,nbxh=res['nbxh'],regID=res['zch'],date=cdate)
                         self.PrintInfo(entdict,self.f)
             if br==1:break
 
@@ -94,7 +96,7 @@ class GetYCParser(YCParser):
         else:
             infolist=json.loads(str(inforesult))['data']
             for info in infolist:
-                f.write(ent.get('Name').replace('\n','').strip()+'|')
+                f.write(ent.get('Name')+'|')
                 f.write(ent.get('regID')+'|')
                 f.write(str(info['rownum'])+'|')
                 if info['lryy']:f.write(info['lryy'])

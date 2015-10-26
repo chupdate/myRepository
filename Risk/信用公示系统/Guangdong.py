@@ -51,7 +51,9 @@ class GetYCParser(YCParser):
                             break
                         else:
                             if cdate<=enddate:
-                                Name=re['entName'];regID=re['regNO'];entNo=re['entNo']
+                                Name=re['entName'].replace('\n','').strip()
+                                if len(Name)<=3:continue
+                                regID=re['regNO'];entNo=re['entNo']
                                 entType=re['entType'];regOrg=re['decOrg']
                                 entdict=dict(Name=Name,regID=regID,entNo=entNo,entType=entType,regOrg=regOrg)
                                 self.PrintInfo(entdict)
@@ -74,4 +76,4 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='广东'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,10,8),enddate=date.today()-timedelta(days=1))
+    YCParser.GetYC(location,startdate=date(1900,10,8),enddate=date.today()-timedelta(days=0))
