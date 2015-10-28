@@ -76,7 +76,7 @@ class GetYCParser(YCParser):
                         else:
                             if cdate<=enddate:
                                 Name=Namelist[i].replace('\n','').strip()
-                                if len(Name)<=3:continue
+                                if self.checkname(Name)==False:continue
                                 entdict=dict(Name=Name,regID=regIDlist[i],Date=cdate,ID=IDlist[i],ORG=ORGlist[i],SeqID=SeqIDlist[i])
                                 self.PrintInfo(entdict,self.f)
                     except Exception:

@@ -31,7 +31,7 @@ class GetYCParser(YCParser):
         while True:
             try:
                 pageNos+=1
-                if pageNos>6519:break
+                if pageNos>6520:break
                 time.sleep(1)
                 req=urllib.request.Request(
                     url='http://aic.hainan.gov.cn:1888/aiccips/main/abnInfoList.html',
@@ -58,7 +58,7 @@ class GetYCParser(YCParser):
                         else:
                             if cdate<=enddate:
                                 Name=result['entName'].replace('\n','').strip()
-                                if len(Name)<=3:continue
+                                if self.checkname(Name)==False:continue
                                 entdict=dict(Name=Name,reg=result['regNO'],entNo=result['entNo'],entType=result['entType'],regOrg=result['decOrg'])
                                 self.PrintInfo(entdict,self.f)
                     except Exception:
@@ -73,9 +73,7 @@ class GetYCParser(YCParser):
             data=self.getinfopostdata(ent),
             headers={'User-Agent':'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0',
                      'Content-Length':'71',
-                     'Content-Type': 'application/x-www-form-urlencoded',
-                     'Cookie': 'JSESSIONID=CgsBFgdgVi3QhkH2wsJ-Qkzkj5mrI6FfjegA.aiccips_1; CNZZDATA1000300888=1269382305-1445819375-http%253A%252F%252Fgsxt.saic.gov.cn%252F%7C1445842173'}
-        )
+                     'Content-Type': 'application/x-www-form-urlencoded'})
         inforesult=self.gethtml(req)
         infolist=inforesult.findAll('td')
         l=int(len(infolist)/6)

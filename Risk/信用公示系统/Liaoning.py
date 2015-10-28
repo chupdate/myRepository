@@ -48,7 +48,7 @@ class GetYCParser(YCParser):
                         else:
                             if cdate<=enddate:
                                 Name=infolist[i].contents[0].replace('\n','').strip()
-                                if len(Name)<=3:continue
+                                if self.checkname(Name)==False:continue
                                 regID=regIDlist[i].contents[0]
                                 Name=Name.replace('\n','').strip()
                                 regID=regID.replace('\n','').strip()

@@ -74,7 +74,7 @@ class GetYCParser(YCParser):
                         else:
                             if cdate<=enddate:
                                 Name=jsonre['entname'].replace('\n','').strip()
-                                if len(Name)<=3:continue
+                                if self.checkname(Name)==False:continue
                                 entdict=dict(Name=Name,pri=jsonre['pripid'],reg=jsonre['regno'],type=jsonre['enttype'])
                                 self.PrintInfo(entdict,self.f)
                     except Exception:

@@ -56,7 +56,7 @@ class GetYCParser(YCParser):
                             if cdate<=enddate:
                                 priName=Namelist[i].find('a')
                                 Name=priName.contents[0].replace('\n','').strip()
-                                if len(Name)<=3:continue
+                                if self.checkname(Name)==False:continue
                                 reg=r'doOpen\(\'(.*?)\'\)'
                                 pattern=re.compile(reg)
                                 pri=pattern.findall(str(priName))[0]

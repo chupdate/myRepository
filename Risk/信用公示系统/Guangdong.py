@@ -52,7 +52,7 @@ class GetYCParser(YCParser):
                         else:
                             if cdate<=enddate:
                                 Name=re['entName'].replace('\n','').strip()
-                                if len(Name)<=3:continue
+                                if self.checkname(Name)==False:continue
                                 regID=re['regNO'];entNo=re['entNo']
                                 entType=re['entType'];regOrg=re['decOrg']
                                 entdict=dict(Name=Name,regID=regID,entNo=entNo,entType=entType,regOrg=regOrg)
