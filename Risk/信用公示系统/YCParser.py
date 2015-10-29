@@ -10,7 +10,7 @@ class YCParser():
 
     def __init__(self):
         self.opener=urllib.request.build_opener(self.RedirectHandler)
-        self.namecheck=['̯']
+        self.namecheck=['摊']
 
     class RedirectHandler(urllib.request.HTTPRedirectHandler):
         def redirect_request(self, req, fp, code, msg, headers, newurl):
