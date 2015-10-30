@@ -4,6 +4,7 @@ import os
 from datetime import date
 from YCParser import YCParser
 
+
 def dealdate(cdate):
     k1=cdate.find('年')
     k3=len(cdate)
@@ -29,15 +30,16 @@ if __name__=='__main__':
     yc=YCParser()
     rs='D:/GSXT/GSXTresult/'
     dirlist=os.listdir(rs)
-    frecord=open('D:/GSXT/GSXT整理.txt','w')
-    fother=open('D:/GSXT/移出表.txt','w')
-    reasonlist=[]
+    frecord=open('D:/GSXT/GSXT整理temp.txt','w')
     total=0
+    ntotal=0
+    idlist={}
     for dirr in dirlist:
         f=open(rs+dirr,'r')
         k=dirr.find('.')
         prov=dirr[:k]   #取省份
         recordlist={}   #记录字典
+        yclist={}
         for line in f.readlines():
             total+=1
             if total % 10000==0:print(total)
@@ -48,10 +50,14 @@ if __name__=='__main__':
             infolist[4]=str(cdate)
             id=infolist[1]
             reason=infolist[3]
-            if reason not in reasonlist:reasonlist.append(reason)
             infolist[-1]=prov
             if (infolist[5]!='') or (infolist[6]!=''):
-                fother.write('|'.join(infolist)+'\n')
+                if id in yclist:
+                    if reason in yclist[id]:yclist[id][reason]=max(cdate,yclist[id][reason])
+                    else:yclist[id][reason]=cdate
+                else:
+                    yclist[id]={}
+                    yclist[id][reason]=cdate
             else:
                 if id not in recordlist:
                     recordlist[id]={}
@@ -64,9 +70,12 @@ if __name__=='__main__':
                     else:continue
         for key in recordlist.keys():
             for reason in recordlist[key].keys():
-                ilist=recordlist[key][reason]['write']
-                frecord.write('|'.join(ilist)+'\n')
+                if not ((key in yclist) and (reason in yclist[key]) and (recordlist[key][reason]['date']<=yclist[key][reason])):
+                    ilist=recordlist[key][reason]['write']
+                    frecord.write('|'.join(ilist)+'\n')
+                    ntotal+=1
+                    if key not in idlist:idlist[key]=0
         f.close()
     frecord.close()
-    fother.close()
-    print(reasonlist)
+    print('total=',ntotal)
+    print('compnum=',len(idlist))
