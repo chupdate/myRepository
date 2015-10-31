@@ -20,7 +20,7 @@ class GetYCParser(YCParser):
         while True:
             try:
                 pageNos+=1
-                if pageNos>183:break
+                if pageNos>184:break
                 req=urllib.request.Request(
                     url='http://gsxt.xzaic.gov.cn/exceptionInfoSelect.jspx',
                     data=self.getpostdata(pageNos),
@@ -54,7 +54,8 @@ class GetYCParser(YCParser):
                             break
                         else:
                             if cdate<=enddate:
-                                Name=infolist[i].contents[0]
+                                Name=infolist[i].contents[0].replace('\n','').strip()
+                                if self.checkname(Name)==False:continue
                                 regID=regIDlist[i].contents[0]
                                 href=infolist[i].get('href')
                                 entdict=dict(Name=Name,regID=regID,Date=cdate,href=href)

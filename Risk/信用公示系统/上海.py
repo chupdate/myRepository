@@ -1,5 +1,6 @@
 __author__ = 'Han'
 #coding=utf-8
+#只能获取50页的信息
 import urllib.request,urllib.parse
 import re
 from datetime import *
@@ -12,7 +13,7 @@ class GetYCParser(YCParser):
             'captcha':'',
             'condition.pageNo':'%d'% pageNos,
             'condition.insType':'',
-            'session.token':'61d07d45-1236-4803-ad46-e7f10e8a3b3a',
+            'session.token':'88872345-df19-4ee0-b711-ee4b2b2104d7',
             'condition.keyword':''
         }).encode('utf-8')
         return postdata
@@ -22,7 +23,7 @@ class GetYCParser(YCParser):
         while True:
             try:
                 pageNos+=1
-                if pageNos>31733:break
+                if pageNos>50:break
                 req=urllib.request.Request(
                     url='https://www.sgs.gov.cn/notice/search/ent_except_list',
                     data=self.getpostdata(pageNos),
@@ -53,7 +54,8 @@ class GetYCParser(YCParser):
                             break
                         else:
                             if cdate<=enddate:
-                                Name=infolist[i-2].find('a').contents[0]
+                                Name=infolist[i-2].find('a').contents[0].replace('\n','').strip()
+                                if self.checkname(Name)==False:continue
                                 regID=infolist[i-1].contents[0]
                                 href=infolist[i-2].find('a').get('href')
                                 entdict=dict(Name=Name,regID=regID,href=href)
@@ -72,4 +74,4 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='上海'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,10,8),enddate=date.today()-timedelta(days=1))
+    YCParser.GetYC(location,startdate=date(1900,10,8),enddate=date.today()-timedelta(days=0),fmode='a')

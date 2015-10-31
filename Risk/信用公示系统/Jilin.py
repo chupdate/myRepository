@@ -33,12 +33,12 @@ class GetYCParser(YCParser):
     def getentlist(self,startdate,enddate):
         pageNos=0
         #X-CSRF-TOKEN
-        self.token='113251da-9962-448f-93cb-21601f75d2cf'
-        self.cookie='JSESSIONID=w7Jne7e6DHP5Ce3X5mXpUiUF.undefined; CNZZDATA1000300906=689205639-1438063354-http%253A%252F%252Fgsxt.saic.gov.cn%252F%7C1444379643; SECSESSIONID=fc57d306ce4847417f3f5d9fd32ce2a5; ROBOTCOOKIEID=1082e2e8028316f76c583601b0ff27cd36d9d826'
+        self.token='a75f5251-9c1e-4dcf-839b-0172215906dc'
+        self.cookie='JSESSIONID=WyC+VJv-qbXA0+ivrTPWrnD4.undefined; SECSESSIONID=1853b686fb472146839af3cfd8368e7d; CNZZDATA1000300906=982664094-1445825869-http%253A%252F%252Fgsxt.saic.gov.cn%252F%7C1445825869'
         while True:
             try:
                 pageNos+=1
-                if pageNos>10778:break
+                if pageNos>7090:break
                 req=urllib.request.Request(
                     url='http://211.141.74.198:8081/aiccips/pub/jyyc',
                     data=self.getpagepostdata(pageNos),
@@ -73,7 +73,9 @@ class GetYCParser(YCParser):
                             break
                         else:
                             if cdate<=enddate:
-                                entdict=dict(Name=jsonre['entname'],pri=jsonre['pripid'],reg=jsonre['regno'],type=jsonre['enttype'])
+                                Name=jsonre['entname'].replace('\n','').strip()
+                                if self.checkname(Name)==False:continue
+                                entdict=dict(Name=Name,pri=jsonre['pripid'],reg=jsonre['regno'],type=jsonre['enttype'])
                                 self.PrintInfo(entdict,self.f)
                     except Exception:
                         self.printitemerror(pageNos,jsonre)
@@ -98,7 +100,7 @@ class GetYCParser(YCParser):
         infolist=json.loads(inforesult)
         l=len(infolist)
         for i in range(l):
-            f.write(ent.get('Name').strip()+'|')
+            f.write(ent.get('Name')+'|')
             f.write(ent.get('reg')+'|')
             f.write(str(i+1)+'|')
             f.write(infolist[i]['specause']+'|')

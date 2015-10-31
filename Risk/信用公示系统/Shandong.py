@@ -65,7 +65,9 @@ class GetYCParser(YCParser):
                             break
                         else:
                             if cdate<=enddate:
-                                entdict=dict(Name=jsonre['entname'],pri=jsonre['pripid'],reg=jsonre['regno'],type=jsonre['enttype'])
+                                Name=jsonre['entname'].replace('\n','').strip()
+                                if self.checkname(Name)==False:continue
+                                entdict=dict(Name=Name,pri=jsonre['pripid'],reg=jsonre['regno'],type=jsonre['enttype'])
                                 self.PrintInfo(entdict,self.f)
                     except Exception:
                         self.printitemerror(pageNos,jsonre)

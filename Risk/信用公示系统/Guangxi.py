@@ -56,7 +56,8 @@ class GetYCParser(YCParser):
                             break
                         else:
                             if cdate<=enddate:
-                                    Name=infolist[i].contents[0]
+                                    Name=infolist[i].contents[0].replace('\n','').strip()
+                                    if self.checkname(Name)==False:continue
                                     regID=regIDlist[i].contents[0]
                                     href=infolist[i].get('href')
                                     entdict=dict(Name=Name,regID=regID,Date=cdate,href=href)

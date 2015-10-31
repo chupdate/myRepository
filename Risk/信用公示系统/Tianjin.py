@@ -60,7 +60,8 @@ class GetYCParser(YCParser):
                         cdate=str(datelist[i].contents[0])
                         cdate=self.changedate(cdate)
                         if (cdate>=startdate)&(cdate<=enddate):
-                            Name=infolist[i].find('a').contents[0]
+                            Name=infolist[i].find('a').contents[0].replace('\n','').strip()
+                            if self.checkname(Name)==False:continue
                             href=infolist[i].find('a').get('href')
                             reg=r'entId=(.*)'
                             pattern=re.compile(reg)

@@ -20,7 +20,7 @@ class GetYCParser(YCParser):
         while True:
             try:
                 pageNos+=1
-                if pageNos>83254:break
+                if pageNos>8420:break
                 req=urllib.request.Request(
                     url='http://qyxy.baic.gov.cn/dito/ditoAction!ycmlFrame.dhtml',
                     data=self.getpostdata(pageNos),
@@ -45,7 +45,8 @@ class GetYCParser(YCParser):
                             break
                         else:
                             if cdate<=enddate:
-                                Name=infolist[i-2].find('a').contents[0]
+                                Name=infolist[i-2].find('a').contents[0].replace('\n','').strip()
+                                if self.checkname(Name)==False:continue
                                 regID=infolist[i-1].contents[0]
                                 EntInfo=infolist[i-2].find('a').get('onclick')
                                 reg=r'\'([A-Za-z0-9]{32})\''

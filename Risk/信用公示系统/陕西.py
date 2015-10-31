@@ -6,6 +6,7 @@ import re
 from datetime import *
 from YCParser import YCParser
 import time
+import http.cookiejar
 
 class GetYCParser(YCParser):
 
@@ -23,11 +24,12 @@ class GetYCParser(YCParser):
         while True:
             try:
                 pageNos+=1
+                if pageNos>13065:break
                 req=urllib.request.Request(
                     url='http://117.22.252.219:8002/xxcx.do?method=ycmlIndex&random='+str(time.time()*1000)+'&cxyzm=no&entnameold=&djjg=&maent.entname=&page.currentPageNo='+str(pageNos)+'&yzm=',
                     headers={'User-Agent':'Magic Browser'}
                 )
-                result=self.gethtml(req,timeout=60)
+                result=self.gethtml(req,timeout=200)
                 infolist=result.findAll('a',attrs={'onclick':re.compile(r'javascript:doOpen*')})
                 regIDlist=result.findAll('li',attrs={'class':'tb-a2'})
                 datelist=result.findAll('li',attrs={'class':'tb-a3'})
@@ -55,7 +57,8 @@ class GetYCParser(YCParser):
                             break
                         else:
                             if cdate<=enddate:
-                                Name=infolist[i].contents[0]
+                                Name=infolist[i].contents[0].replace('\n','').strip()
+                                if self.checkname(Name)==False:continue
                                 regID=regIDlist[i].contents[0]
                                 pri=self.dealID(infolist[i].get('onclick'))
                                 entdict=dict(Name=Name,regID=regID,Date=cdate,pri=pri)
@@ -78,4 +81,4 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='陕西'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,7,1),enddate=date.today()-timedelta(days=1))
+    YCParser.GetYC(location,startdate=date(1900,7,1),enddate=date.today()-timedelta(days=0))
