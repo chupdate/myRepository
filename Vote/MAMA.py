@@ -207,7 +207,6 @@ class MAMAVote():
         return enkey.decode()
 
 if __name__=='__main__':
-    '''
     total=0
     while True:
         BTSvote=MAMAVote()
@@ -220,15 +219,8 @@ if __name__=='__main__':
             if BTSvote.logincode=='success':
                 BTSvote.vote()
                 total+=1
-        if total==3:break
-        time.sleep(10)
         if BTSvote.iperror==1:break
+        time.sleep(30)
     os.system('pause')
-    '''
-    BTSvote=MAMAVote()
-    BTSvote.regist()
-    BTSvote.login()
-    BTSvote.vote()
-
 
 
