@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../Python27/MAMA/.idea/MAMA.iml" filepath="$PROJECT_DIR$/../Python27/MAMA/.idea/MAMA.iml" />
       <module fileurl="file://$PROJECT_DIR$/../MAMA/.idea/MAMA.iml" filepath="$PROJECT_DIR$/../MAMA/.idea/MAMA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Python27/MAMA/.idea/MAMA.iml" filepath="$PROJECT_DIR$/../Python27/MAMA/.idea/MAMA.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/myRepository.iml" filepath="$PROJECT_DIR$/.idea/myRepository.iml" />
     </modules>
   </component>
