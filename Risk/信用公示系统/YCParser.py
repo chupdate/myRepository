@@ -12,6 +12,7 @@ class YCParser():
         self.opener=urllib.request.build_opener(self.RedirectHandler)
         self.namecheck=['摊']
 
+    #解决自动重定向问题
     class RedirectHandler(urllib.request.HTTPRedirectHandler):
         def redirect_request(self, req, fp, code, msg, headers, newurl):
             m = req.get_method()

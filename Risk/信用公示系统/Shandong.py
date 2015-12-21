@@ -31,7 +31,7 @@ class GetYCParser(YCParser):
     def getentlist(self,startdate,enddate):
         pageNos=0
         #根据Cookie获取token
-        self.cookie=' JSESSIONID=+dp8swNy9jPUjC2yc6D2hYoO.undefined'
+        self.cookie=' JSESSIONID=GSzG3Iev4t6IQ3oqyU1X3eFh.undefined'
         req=urllib.request.Request(
             url='http://218.57.139.24/pub/abnormalrecordindex',
             headers={'Cookie':self.cookie}
@@ -99,4 +99,4 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='山东'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,10,9),enddate=date.today())
+    YCParser.GetYC(location,startdate=date(2015,11,1),enddate=date.today())

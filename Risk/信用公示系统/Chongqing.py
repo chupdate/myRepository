@@ -24,7 +24,7 @@ class GetYCParser(YCParser):
         while True:
             try:
                 pageNos+=1
-                if pageNos>8040:break
+                if pageNos>7824:break
                 url='http://gsxt.cqgs.gov.cn/search_searchjyyc.action?currentpage='+str(pageNos)+'&itemsperpage=10'
                 result=self.gethtml(url)
                 result=json.loads(str(result))
@@ -115,4 +115,4 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='重庆'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,10,9),enddate=date.today())
+    YCParser.GetYC(location,startdate=date(2015,11,1),enddate=date.today())

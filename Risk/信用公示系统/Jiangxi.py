@@ -8,11 +8,11 @@ from YCParser import YCParser
 class GetYCParser(YCParser):
 
     def getentlist(self,startdate,enddate):
-        pageNos=12438
+        pageNos=0
         while True:
             try:
                 pageNos+=1
-                if pageNos>27498:break
+                if pageNos>27492:break
                 req=urllib.request.Request(
                     url='http://gsxt.jxaic.gov.cn/ECPS/enterpriseAbnAction_enterpriseList.action?curr_Page='+str(pageNos),
                     headers={'User-Agent':'Magic Browser'}
@@ -67,4 +67,4 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='江西'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,10,9),enddate=date.today())
+    YCParser.GetYC(location,startdate=date(2015,11,1),enddate=date.today())

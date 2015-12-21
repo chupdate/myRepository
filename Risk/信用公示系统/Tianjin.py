@@ -37,7 +37,7 @@ class GetYCParser(YCParser):
         while True:
             try:
                 pageNos+=1
-                if pageNos>18640:break
+                if pageNos>18678:break
                 req=urllib.request.Request(
                     url='http://tjcredit.gov.cn/platform/saic/exclist.ftl',
                     data=self.getpostdata(pageNos),
@@ -103,4 +103,4 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='天津'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,10,8),enddate=date.today()-timedelta(days=0))
+    YCParser.GetYC(location,startdate=date(2015,11,1),enddate=date.today()-timedelta(days=0))

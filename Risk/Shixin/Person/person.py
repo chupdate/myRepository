@@ -23,7 +23,6 @@ class GetshixinPersonParser:
             'unperformPart','disruptTypeName','publishDate','focusNumber'
         ]
 
-
     def getpostdata(self,PageNum):
         postdata=urllib.parse.urlencode({
             'currentPage':'%d'% PageNum,

@@ -20,11 +20,11 @@ class GetYCParser(YCParser):
         return postdata
 
     def getentlist(self,startdate,enddate):
-        pageNos=822
+        pageNos=0
         while True:
             try:
                 pageNos+=1
-                #if pageNos>26679:break
+                if pageNos>26619:break
                 req=urllib.request.Request(
                     url='http://222.143.24.157/exceptionInfoSelect.jspx',
                     data=self.getpostdata(pageNos),
@@ -81,6 +81,6 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='河南'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,10,8),enddate=date.today()-timedelta(days=0),fmode='a',pagemode='a',itemmode='a')
+    YCParser.GetYC(location,startdate=date(2015,11,1),enddate=date.today()-timedelta(days=0))
 
 

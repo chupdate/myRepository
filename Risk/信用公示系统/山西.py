@@ -20,7 +20,7 @@ class GetYCParser(YCParser):
         while True:
             try:
                 pageNos+=1
-                if pageNos>18897:break
+                if pageNos>18673:break
                 req=urllib.request.Request(
                     url='http://218.26.1.108/exceptionInfoSelect.jspx',
                     data=self.getpostdata(pageNos),
@@ -74,4 +74,4 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='山西'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,9,30),enddate=date.today()-timedelta(days=0))
+    YCParser.GetYC(location,startdate=date(2015,11,1),enddate=date.today()-timedelta(days=0))

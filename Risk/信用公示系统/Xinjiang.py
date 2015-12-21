@@ -24,7 +24,7 @@ class GetYCParser(YCParser):
         while True:
             try:
                 pageNos+=1
-                if pageNos>14916:break
+                if pageNos>14781:break
                 url='http://gsxt.xjaic.gov.cn:7001/xxcx.do?method=ycmlIndex&random=10000000&cxyzm=no&entnameold=&djjg=&' \
                     'maent.entname=&page.currentPageNo='+str(pageNos)+'&yzm='
                 result=self.gethtml(url)
@@ -83,7 +83,7 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='新疆'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,9,23),enddate=date.today()-timedelta(days=0))
+    YCParser.GetYC(location,startdate=date(2015,11,1),enddate=date.today()-timedelta(days=0))
 
 
 

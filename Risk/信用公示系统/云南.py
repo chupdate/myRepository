@@ -19,7 +19,7 @@ class GetYCParser(YCParser):
 
     def getentlist(self,startdate,enddate):
         pageNos=0
-        self.token='f8f1f471-eea1-41b6-96fb-45b185511670'
+        self.token='3ae37717-5ef1-4f4f-bf46-06b4d4bd7f8c'
         while True:
             try:
                 pageNos+=1
@@ -74,4 +74,4 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='云南'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,10,10),enddate=date.today()-timedelta(days=0))
+    YCParser.GetYC(location,startdate=date(2015,11,1),enddate=date.today()-timedelta(days=0))

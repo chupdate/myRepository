@@ -1,7 +1,6 @@
 __author__ = 'Chen'
 #coding=utf-8
 import urllib.request,urllib.parse
-
 import re
 from datetime import *
 from YCParser import YCParser
@@ -93,4 +92,4 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='辽宁'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,10,10),enddate=date.today()-timedelta(days=0))
+    YCParser.GetYC(location,startdate=date(2015,11,1),enddate=date.today()-timedelta(days=0))

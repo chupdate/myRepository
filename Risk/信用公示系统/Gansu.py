@@ -11,7 +11,7 @@ class GetYCParser(YCParser):
         while True:
             try:
                 pageNos+=1
-                if pageNos>9683:break
+                if pageNos>4715:break
                 req=urllib.request.Request(
                    url='http://xygs.gsaic.gov.cn/gsxygs/pub!getCommon.do?parm=excplist&queryVal=20%&pageno='+str(pageNos),
                    headers={
@@ -66,5 +66,5 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='甘肃'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,9,20),enddate=date.today())
+    YCParser.GetYC(location,startdate=date(2015,11,1),enddate=date.today())
 

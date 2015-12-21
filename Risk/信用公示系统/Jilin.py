@@ -33,8 +33,8 @@ class GetYCParser(YCParser):
     def getentlist(self,startdate,enddate):
         pageNos=0
         #X-CSRF-TOKEN
-        self.token='a75f5251-9c1e-4dcf-839b-0172215906dc'
-        self.cookie='JSESSIONID=WyC+VJv-qbXA0+ivrTPWrnD4.undefined; SECSESSIONID=1853b686fb472146839af3cfd8368e7d; CNZZDATA1000300906=982664094-1445825869-http%253A%252F%252Fgsxt.saic.gov.cn%252F%7C1445825869'
+        self.token='45442415-9bb7-4cf7-86a6-35a0aad109e8'
+        self.cookie=' JSESSIONID=Vn-3yYKEcNevB7IXlvIc9CGl.undefined; CNZZDATA1000300906=982664094-1445825869-http%253A%252F%252Fgsxt.saic.gov.cn%252F%7C1450682842'
         while True:
             try:
                 pageNos+=1
@@ -113,4 +113,4 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='吉林'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,7,24),enddate=date.today())
+    YCParser.GetYC(location,startdate=date(2015,11,1),enddate=date.today())

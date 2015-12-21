@@ -2,6 +2,7 @@ __author__ = 'Chen'
 #coding=utf-8
 #被列入经营异常名录日期由远及近
 #作出决定机关（列入和移出）
+#出现频繁访问错误
 import urllib.request,urllib.parse
 import re
 from datetime import *
@@ -11,7 +12,11 @@ class GetYCParser(YCParser):
 
     def getpostdata(self,pageNos):
         postdata=urllib.parse.urlencode({
-            'pageNos':'%d'% pageNos
+            'pageNos':'%d'% pageNos,
+            'pageNo':'%d' % (pageNos-1),
+            'pageSize':'10',
+            'clear':'',
+            'querystr':'请输入企业名称或注册号'
         }).encode('utf-8')
         return postdata
 
@@ -20,11 +25,12 @@ class GetYCParser(YCParser):
         while True:
             try:
                 pageNos+=1
-                if pageNos>8420:break
+                if pageNos>8921:break
                 req=urllib.request.Request(
                     url='http://qyxy.baic.gov.cn/dito/ditoAction!ycmlFrame.dhtml',
                     data=self.getpostdata(pageNos),
-                    headers={'User-Agent':'Magic Browser'}
+                    headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0',
+                             'Cookie':' JSESSIONID=ZyqLW3VQJpmG2jvYxmdB5z0rmfMQ8D89f1BTv4PQ91Fn5Qjy70Wh!-2120185996; BIGipServerpool_xy3_web=1125492928.17183.0000'}
                 )
                 result=self.gethtml(req)
                 table=result.find('table')
@@ -61,9 +67,13 @@ class GetYCParser(YCParser):
                 if br==1:break
 
     def PrintInfo(self,ent,f):
-        infourl='http://qyxy.baic.gov.cn/gsgs/gsxzcfAction!list_jyycxx.dhtml?entId='+\
-                ent.get('entId')+'&clear=true&timeStamp=1'
-        inforesult=self.gethtml(infourl)
+        req=urllib.request.Request(
+            url='http://qyxy.baic.gov.cn/gsgs/gsxzcfAction!list_jyycxx.dhtml?entId='+\
+                ent.get('entId')+'&clear=true&timeStamp=1',
+            headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0',
+                'Cookie':'JSESSIONID=ZyqLW3VQJpmG2jvYxmdB5z0rmfMQ8D89f1BTv4PQ91Fn5Qjy70Wh!-2120185996; BIGipServerpool_xy3_web=1125492928.17183.0000'}
+        )
+        inforesult=self.gethtml(req)
         info=inforesult.find('body').findAll('td')
         l=int(len(info)/7)
         for j in range(l):
@@ -90,4 +100,4 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='北京'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(1900,10,8),enddate=date.today())
+    YCParser.GetYC(location,startdate=date(2015,11,1),enddate=date.today())
