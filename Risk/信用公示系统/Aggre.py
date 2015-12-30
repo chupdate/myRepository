@@ -1,10 +1,12 @@
 __author__ = 'Han'
 #coding=utf-8
+#把抓取后的文件存入D:/GSXT/GSXTresult/目录下
+#整理后的文件为D:/GSXT/GSXT整理temp.txt
 import os
 from datetime import date
 from YCParser import YCParser
 
-
+#整理成统一的日期格式yyyy-mm-dd
 def dealdate(cdate):
     k1=cdate.find('年')
     k3=len(cdate)
@@ -45,15 +47,15 @@ if __name__=='__main__':
             if total % 10000==0:print(total)
             line=line.replace('\n','')
             infolist=line.split('|')
-            if yc.checkname(infolist[0])==False: continue
+            if yc.checkname(infolist[0])==False: continue    #没有名称直接跳过
             cdate=dealdate(infolist[4])      #时间类型
-            infolist[4]=str(cdate)
+            infolist[4]=str(cdate)          #转换成标准时间类型
             id=infolist[1]
             reason=infolist[3]
             infolist[-1]=prov
-            if (infolist[5]!='') or (infolist[6]!=''):
+            if (infolist[5]!='') or (infolist[6]!=''):    #存在移出的情况
                 if id in yclist:
-                    if reason in yclist[id]:yclist[id][reason]=max(cdate,yclist[id][reason])
+                    if reason in yclist[id]:yclist[id][reason]=max(cdate,yclist[id][reason])    #比较时间
                     else:yclist[id][reason]=cdate
                 else:
                     yclist[id]={}
