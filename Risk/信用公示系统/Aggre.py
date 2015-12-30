@@ -48,28 +48,33 @@ if __name__=='__main__':
             line=line.replace('\n','')
             infolist=line.split('|')
             if yc.checkname(infolist[0])==False: continue    #没有名称直接跳过
-            cdate=dealdate(infolist[4])      #时间类型
-            infolist[4]=str(cdate)          #转换成标准时间类型
-            id=infolist[1]
-            reason=infolist[3]
-            infolist[-1]=prov
-            if (infolist[5]!='') or (infolist[6]!=''):    #存在移出的情况
-                if id in yclist:
-                    if reason in yclist[id]:yclist[id][reason]=max(cdate,yclist[id][reason])    #比较时间
-                    else:yclist[id][reason]=cdate
-                else:
-                    yclist[id]={}
-                    yclist[id][reason]=cdate
+            try:
+                cdate=dealdate(infolist[4])      #时间类型
+            except Exception:
+                print(line)
             else:
-                if id not in recordlist:
-                    recordlist[id]={}
-                    recordlist[id][reason]=dict(date=cdate,write=infolist)
+                infolist[4]=str(cdate)          #转换成标准时间类型
+                id=infolist[1]
+                reason=infolist[3]
+                infolist[-1]=prov
+                if (infolist[5]!='') or (infolist[6]!=''):    #存在移出的情况
+                    if id in yclist:
+                        if reason in yclist[id]:yclist[id][reason]=max(cdate,yclist[id][reason])    #比较时间
+                        else:yclist[id][reason]=cdate
+                    else:
+                        yclist[id]={}
+                        yclist[id][reason]=cdate
                 else:
-                    if (reason not in recordlist[id]) \
-                            or (reason in recordlist[id]
-                                and cdate>recordlist[id][reason]['date']):    #保留最新的记录
+                    if id not in recordlist:
+                        recordlist[id]={}
                         recordlist[id][reason]=dict(date=cdate,write=infolist)
-                    else:continue
+                    else:
+                        if (reason not in recordlist[id]) \
+                                or (reason in recordlist[id]
+                                    and cdate>recordlist[id][reason]['date']):    #保留最新的记录
+                            recordlist[id][reason]=dict(date=cdate,write=infolist)
+                        else:continue
+        #输出
         for key in recordlist.keys():
             for reason in recordlist[key].keys():
                 if not ((key in yclist) and (reason in yclist[key]) and (recordlist[key][reason]['date']<=yclist[key][reason])):
