@@ -36,16 +36,16 @@ class GetYCParser(YCParser):
         return postdata
 
     def getentlist(self,startdate,enddate):
-        pageNos=-1
-        self.cookie='BIGipServerpool_10.10.10.2_7001=235538954.22811.0000; JSESSIONID=15HJW3sK5GD2gV9nDGlz7HDwncLPsLCQBNGyBwmpzjxFfkThgzD7!2140324602; CNZZDATA1000300873=779724308-1450682012-http%253A%252F%252Fgsxt.saic.gov.cn%252F%7C1450682012'
+        pageNos=7746
+        self.cookie='JSESSIONID=pRF3WlWMx9mmjZRr5kjDB0zq4yRzbJR0BspkY3dl34WfM8rLZTNs!-1422204258; CNZZDATA1000300873=444788887-1453687937-http%253A%252F%252Fgsxt.saic.gov.cn%252F%7C1453687937'
         while True:
             try:
                 pageNos+=1
-                if pageNos>8229:break
+                if pageNos>8253:break
                 req=urllib.request.Request(
                    url='http://www.nmgs.gov.cn:7001/aiccips/main/abnInfoList.html',
                    data=self.getpagepostdata(pageNos),
-                   headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',
+                   headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0',
                             'Content-Length':'19',
                             'Cookie':self.cookie
                             })
@@ -79,7 +79,7 @@ class GetYCParser(YCParser):
         req=urllib.request.Request(
             url='http://www.nmgs.gov.cn:7001/aiccips/GSpublicity/GSpublicityList.html?service=cipUnuDirInfo',
             data=self.getinfopostdata(ent['entNo'],ent['type'],ent['dec']),
-            headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',
+            headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0',
                     'Cookie':self.cookie})
         inforesult=self.gethtml(req)
         infolist=inforesult.findAll('td')
@@ -88,6 +88,6 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='内蒙古'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(2015,11,1),enddate=date.today()-timedelta(days=0))
+    YCParser.GetYC(location,startdate=date(1900,11,1),enddate=date.today()-timedelta(days=0),fmode='a')
 
 

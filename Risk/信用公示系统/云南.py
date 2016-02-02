@@ -19,15 +19,16 @@ class GetYCParser(YCParser):
 
     def getentlist(self,startdate,enddate):
         pageNos=0
-        self.token='3ae37717-5ef1-4f4f-bf46-06b4d4bd7f8c'
+        self.token='14d90848-8f48-405f-be20-7a9639be9d6a'
         while True:
             try:
                 pageNos+=1
-                if pageNos>7093:break
+                if pageNos>6934:break
                 req=urllib.request.Request(
                     url='http://gsxt.ynaic.gov.cn/notice/search/ent_except_list',
                     data=self.getpostdata(pageNos),
-                    headers={'User-Agent':'Magic Browser'}
+                    headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0',
+                             'Cookie':'JSESSIONID_NOTICE=FGfTWlTD5p7hf2kWLwxyPVJ8DHkBTBvNtgx3LQTD3hsyML2NYqJP!-1915091912; notice=20111111; CNZZDATA1000298231=721015559-1453691075-http%253A%252F%252Fgsxt.saic.gov.cn%252F%7C1453696742'}
                 )
                 result=self.gethtml(req)
                 infolist=result.find('table',attrs={'class':'list-table'}).findAll('td')
@@ -74,4 +75,4 @@ class GetYCParser(YCParser):
 if __name__=='__main__':
     location='云南'
     YCParser=GetYCParser()
-    YCParser.GetYC(location,startdate=date(2015,11,1),enddate=date.today()-timedelta(days=0))
+    YCParser.GetYC(location,startdate=date(1900,11,1),enddate=date.today()-timedelta(days=0))
